@@ -1,0 +1,592 @@
+<!DOCTYPE html><html lang="ru"><head>
+			<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<title>Главная</title>
+<meta name="abstract" content="Авиабилеты на сайте аэропорта">
+	<meta name="generator" content="Nemo IBE">
+
+
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css(2)/style_1.css">
+	<script src="js/nemo-search-ru.js"></script>
+	
+	<script>
+		var nemoSourceHost = '/templates/wurst/f2.0';
+		
+		require.config({
+			// Common libraries
+			paths: {
+				domReady:      nemoSourceHost+'/js/lib/requirejs/domReady',
+				text:          nemoSourceHost+'/js/lib/requirejs/text',
+				knockout:      nemoSourceHost+'/js/lib/knockout/v.3.2.0/knockout-3.2.0',
+				AppController: nemoSourceHost+'/js/NemoFrontEndController',
+				jquery:        nemoSourceHost+'/js/lib/jquery/v.2.1.3/jquery-2.1.3.min',
+				jqueryUI:      nemoSourceHost+'/js/lib/jqueryUI/v.1.11.4/jquery-ui.min',
+				jsCookie:      nemoSourceHost+'/js/lib/js.cookie/v.2.0.0/js.cookie',
+				tooltipster:   nemoSourceHost+'/js/lib/tooltipster/jquery.tooltipster.min',
+				numeralJS:     nemoSourceHost+'/js/lib/numeral.js/v.1.5.3/numeral.min',
+				mousewheel:    nemoSourceHost+'/js/lib/jquery.mousewheel/jquery.mousewheel.min',
+				touchpunch:    nemoSourceHost+'/js/lib/jquery.ui.touch-punch/v.0.2.3/jquery.ui.touch-punch.min'
+			},
+			urlArgs: "version=v1.107.0.2",
+			baseUrl: nemoSourceHost,
+			enforceDefine: true,
+			waitSeconds: 30,
+
+			// Overriding requirejs.text so templates will ALWAYS be fetched via XHR request
+			// RTFM: https://github.com/requirejs/text#xhr-restrictions
+			config: {
+				text: {
+					useXhr: function (url, protocol, hostname, port) {
+						// Override function for determining if XHR should be used.
+						// Return true means "use xhr", return false means "fetch the .js version of this resource".
+						return true;
+					}
+				}
+			}
+		});
+
+		require (
+			['AppController', 'knockout'],
+			function (AppController, ko) {
+				var options = {
+					controllerSourceURL: nemoSourceHost,
+					dataURL: '/api',
+					version: 'v1.107.0.1636963167',
+					hostId: document.location.host,
+					root: '/',
+					i18nLanguage: 'ru',
+					componentsAdditionalInfo: {
+						'Flights/SearchForm/Controller': {
+							formData: {"guide":{"countries":{"NL":{"code":"NL","name":"\u041d\u0438\u0434\u0435\u0440\u043b\u0430\u043d\u0434\u044b","nameEn":"Netherlands"}},"cities":{"47803":{"IATA":"AMS","name":"\u0410\u043c\u0441\u0442\u0435\u0440\u0434\u0430\u043c","nameEn":"Amsterdam","countryCode":"NL","id":47803}},"airports":{"AMS":{"IATA":"AMS","cityId":47803,"cityIata":"AMS","isAggregation":false,"airportRating":"9105","baseType":"airport","properNameEn":null,"properName":"\u0421\u0445\u0438\u043f\u0445\u043e\u043b","name":"\u0421\u0445\u0438\u043f\u0445\u043e\u043b, \u0410\u043c\u0441\u0442\u0435\u0440\u0434\u0430\u043c","nameEn":"Amsterdam Airport Schiphol","countryCode":"NL"}}},"flights":{"search":{"request":{"segments":[{"departure":{"IATA":"AMS","isCity":false,"cityId":47803},"arrival":null}],"passengers":[{"type":"ADT","count":1}],"parameters":{"searchType":"OW","direct":false,"aroundDates":0,"serviceClass":"All","flightNumbers":[],"airlines":[],"delayed":false,"priceRefundType":null}},"formData":{"maxLimits":{"passengerCount":{"ADT":"6","SRC":"6","YTH":"6","CLD":"4","INF":"2","INS":"2"},"totalPassengers":"9","flightSegments":"5"},"dateOptions":{"minOffset":0,"maxOffset":360,"aroundDatesValues":[]},"showCitySwapBtn":true,"scheduleSearchEnable":true,"onFocusAutocomplete":false,"forceAggregationAirports":false,"searchWithoutAdults":false,"hideDirectOnlyCheckbox":false,"highlightDates":true,"disableUnavailableDate":false,"passengersSelect":{"extendedPassengersSelect":true,"passengersSelectAlt":true,"tripType":"select","fastPassengersSelect":[{"label":"singleAdult","set":{"ADT":1}},{"label":"twoAdults","set":{"ADT":2}},{"label":"twoAdultsWithChild","set":{"ADT":2,"CLD":1}}]}}}},"system":{"info":{"response":{"timestamp":1636963617.5151839,"responseTime":0.062971830368041992},"user":{"userID":748751,"agencyID":622713,"status":"guest","isB2B":false,"settings":{"currentLanguage":"ru","currentCurrency":"RUB","agencyCurrency":"RUB","agencyCountry":"RU","googleMapsApiKey":"","googleMapsClientId":"","showFullFlightsResults":"true"}}}}}
+						}
+					},
+					waitForDOMReady: true
+				},
+				controller;
+
+				
+				options.templateSourceURL = '/frontendStatic/html/wurst.' + options.hostId + '/' + options.version + '/' + options.i18nLanguage + '/';
+				options.i18nURL           = '/frontendStatic/i18n/wurst.' + options.hostId + '/' + options.version;
+				
+					
+									
+
+				controller = new AppController(document.getElementsByClassName('js-nemoApp')[0], options);
+
+				// Special URLs
+				controller.routes.push({
+					re: /^(?:index\.php)?\?.*go=search(?:\/|%2F)index(?:\&tune-search=(\d+))?.*$/,
+					handler: 'Flights/SearchForm/Controller'
+				});
+				controller.routes.push({
+					re: /^(index\.php)?\?(?:(?!go=).)*?$/,
+					handler: 'Flights/SearchForm/Controller'
+				});
+				controller.routes.push({
+					re: /^search__index(\?.*)?$/,
+					handler: 'Flights/SearchForm/Controller'
+				});
+			}
+		);
+		
+	</script>
+	
+
+
+
+<script>
+	</script><script src="js/script.js"></script><link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/mav-aero-style.css">
+<style>
+.site-logo {
+    height: 80px;
+}
+.site-header {
+    padding: 30px 0 23px;
+}
+</style>	</head>
+		
+	<body class="nemo-root js-nemoApp" data-bind="moneyInit: {'EUR': '0.012162890291946','USD': '0.013925288044583','RUB': '1'}">
+		<!-- BEGIN /frontend/index.tpl -->
+						
+		<div class="nemo-common-pageWrapper">
+<!-- меню для телефонов -->
+	<div class="mobile-menu container"> <span class="fake-link mobile-menu-item br3">Меню</span> </div>
+	<!-- /mobile-menu -->
+	<!-- главное меню -->
+	<div class="main-nav-wrap open">
+		<nav class="container br3" role="navigation">
+			<ul class="main-menu">
+				<li class="main-menu-item fl br3tr nav-main-passengers ">
+					<div class="menu-item-inner"> <i class="br2"></i> <strong>Пассажирам</strong> <span>Подготовка к полёту</span> </div>
+					<div class="submenu-block br3bl">
+						<ul class="submenu submenu-1 fl">
+						
+								<ul>
+								
+									<li> <a href="#">Город Златоуст</a> </li>
+									<li> <a href="#">Гостиницы Златоуста</a> </li>
+								</ul>
+							</li>
+							<!-- <li class="submenu-item"> <a href="#/" target="_blank">Возможности туризма</a>
+								<ul>
+									<li> <a href="#" target="_blank">О регионе</a> </li>
+									<li> <a href="#" target="_blank">Что посмотреть</a> </li>
+									<li> <a href="#s" target="_blank">Контакты турфирм</a> </li>
+								</ul>
+							</li> -->
+						</ul>
+						<ul class="submenu submenu-2 fl">
+							<li class="submenu-item"> <span>Правила</span>
+								<header class="nemo-common-pageHeader">
+	<div class="nemo-common-pageHeader__inner container">
+		<div class="nemo-common-pageHeader__inner__headerRight">
+
+			
+									<a href="/booking__status" class="nemo-ui-pseudoLink nemo-common-pageHeader__checkBook js-header-checkOrder">
+						Проверить состояние заказа
+					</a>
+
+					<!-- BEGIN /checkBooking_popup.tpl -->
+<script>
+		require ([
+		'jquery',
+		'/templates/wurst/f2.0/legacyJS/jquery.nemoSVARX/jquery.nemoSVARX.js',
+		'/templates/wurst/f2.0/legacyJS/jquery.nemoSVARX/jquery.nemoSVARX.methods.main.js',
+		'/templates/wurst/f2.0/legacyJS/jquery.nemoSVARX/jquery.SVARXBinder.js'
+	], function ($) {
+				
+
+		$(function () {
+			$('.js-header-checkOrder__popup')
+				.SVARXBinder({
+					XMLText: '<?xml version="1.0"?><svarx><preprocess>' +
+					'<rule for="/.*/" type="trim"/>' +
+					'</preprocess><validate>' +
+					'<rule for="/.*/" type="required" onerror="svarx-bookCheck-required"/>' +
+					'<rule for="booking_num" type="regexp" match="[\\d\\-a-zA-Z-а-яА-Я]+" onerror="svarx-bookCheck-intRequired"/>' +
+					'</validate>' +
+					'</svarx>',
+					errorMessagesURL: '/SVARXSupport__getSVARXErrors',
+					SVARXOptions: {bindTo:'submit'}
+				});
+		});
+
+		
+				});
+	</script>
+
+<form class="js-header-checkOrder__popup nemo-common-checkOrder nemo-common-checkOrder_popup" style="display: none;" method="post" action="/booking__status">
+	<div class="nemo-common-checkOrder__header">Введите номер заказа и фамилию одного из пассажиров</div>
+	<div class="nemo-common-checkOrder__field nemo-common-checkOrder__field_bookingId js-validation_anchor">
+		<label class="nemo-ui-textInput nemo-common-checkOrder__field__label">
+			<span class="nemo-ui-textInput__caption nemo-common-checkOrder__field__label__caption">
+				Номер заказа, локатор или номер билета
+			</span><input class="nemo-ui-textInput__input nemo-common-checkOrder__field__label__input" name="booking_num" type="text">
+		</label>
+	</div>
+	<div class="nemo-common-checkOrder__field nemo-common-checkOrder__field_name js-validation_anchor">
+		<label class="nemo-ui-textInput nemo-common-checkOrder__field__label">
+			<span class="nemo-ui-textInput__caption nemo-common-checkOrder__field__label__caption">
+				Код доступа или фамилия пассажира
+			</span><input class="nemo-ui-textInput__input nemo-common-checkOrder__field__label__input" name="passenger_lastname" type="text">
+		</label>
+	</div>
+	<input type="hidden" name="go_open" value="Открыть">
+</form>
+<!-- END /checkBooking_popup.tpl -->				
+				<a href="/authorization__auth_client?back_location=d41d8cd98f00b204e9800998ecf8427e" class="nemo-ui-button nemo-ui-button_common nemo-ui-button_medium nemo-common-pageHeader__inner__headerLinks__item nemo-common-pageHeader__auth js-header-auth
+							 nemo-common-pageHeader__auth__borderRight ">
+					Войти
+				</a>
+
+				<div class="js-header-restorepass" style="display: none;"></div>
+
+				<!-- BEGIN /authorization_popup.tpl -->
+<script>
+		require ([
+		'jquery',
+		'/templates/wurst/f2.0/legacyJS/jquery.nemoSVARX/jquery.nemoSVARX.js',
+		'/templates/wurst/f2.0/legacyJS/jquery.nemoSVARX/jquery.nemoSVARX.methods.main.js',
+		'/templates/wurst/f2.0/legacyJS/jquery.nemoSVARX/jquery.SVARXBinder.js'
+	], function ($) {
+		
+
+		$(function () {
+			$('.js-auth-loginform')
+				.one('svarxfailed svarxloaded',function(e){
+					$(this).on('submit',function(e) {
+						if (e.isDefaultPrevented()) {
+							return;
+						}
+
+						var $form = $(this),
+							$stub = $('<div></div>').addClass('js-auth__form__stub nemo-auth__stub'),
+							$messageblock = $form.find('.js-auth__message').empty().hide(),
+							$errorblock = $form.find('.js-auth__error').empty().hide();
+
+						e.preventDefault();
+
+						// Creating stub
+						$(this).append($stub);
+
+						$.post(
+							$form.prop('action'),
+							$form.serialize()+'&json=1',
+							function (data) {
+								$stub.remove();
+								if (data.success) {
+									if(data.message.length > 0) {
+										$messageblock.empty().html(data.message).show();
+									}
+									if (typeof data.url != "undefined") {
+										document.location = (data.url != '') ? data.url : '/';
+									}
+								}
+								else {
+									$errorblock.empty().html(data.message).show();
+								}
+							},
+							'json'
+						).error(function(a,s,d,f){
+							$stub.remove();
+							$errorblock.empty().html(s).show();
+						});
+					})
+				})
+				.SVARXBinder({
+					XMLText: '<?xml version="1.0"?><svarx><preprocess/><validate>' +
+					'<rule for="/^(?!back_location)/" type="required" onerror="svarx-auth-required"/>' + // Rule for everything except "back_location" field
+					'<rule type="eq" onerror="svarx-auth-passsunequal">' +
+					'<el name="password"/>' +
+					'<el name="password_again"/>' +
+					'<errtarget name="password_again"/>' +
+					'</rule>' +
+					'</validate>' +
+					'</svarx>',
+					errorMessagesURL: '/SVARXSupport__getSVARXErrors',
+					SVARXOptions: {bindTo:'submit'}
+				});
+		});
+
+	
+		});
+	</script>
+
+<div class="js-auth__popupContainer nemo-auth nemo-auth_popup" style="display: none;">
+
+	<form class="nemo-auth__form nemo-auth__form_login js-auth-loginform" method="post" action="/authorization__auth_client?back_location=d41d8cd98f00b204e9800998ecf8427e">
+
+				<div class="nemo-ui-hilight nemo-ui-hilight_error nemo-auth__error js-auth__error" style="display: none;"></div>
+
+		<div class="nemo-auth__field nemo-auth__field_username js-validation_anchor">
+			<div class="nemo-ui-textInput nemo-auth__field__label">
+				<input class="nemo-ui-textInput__input nemo-auth__field__label__input" name="login" type="text" placeholder="Логин (эл. почта)">
+			</div>
+		</div>
+		<div class="nemo-auth__field nemo-auth__field_password js-validation_anchor">
+			<div class="nemo-ui-textInput nemo-auth__field__label">
+				<input class="nemo-ui-textInput__input nemo-auth__field__label__input" id="password" name="pass" type="password" placeholder="Пароль" autocomplete="off">
+			</div>
+		</div>
+
+		<input name="back_location" type="hidden" value>
+
+				<div class="nemo-ui-hilight nemo-ui-hilight_info nemo-auth__info js-auth__message" style="display: none;"></div>
+
+		<div class="nemo-auth__mainButtons nemo-auth__mainButtons_noMargin">
+			<div class="nemo-auth__mainButtons__links">
+				<a href="#" class="nemo-ui-pseudoLink js-header-restorepass">Забыли пароль?</a>
+
+									<a href="#" class="nemo-ui-pseudoLink js-header-goToRegFromAuth">Регистрация</a>
+							</div>
+
+			<input type="submit" value="Войти" class="nemo-ui-button nemo-ui-button_main">
+		</div>
+	</form>
+
+	
+			
+	</div>
+<!-- END /authorization_popup.tpl -->				<script>
+	require ([
+	'jquery',
+	'/templates/wurst/f2.0/legacyJS/jquery.nemoSVARX/jquery.nemoSVARX.js',
+	'/templates/wurst/f2.0/legacyJS/jquery.nemoSVARX/jquery.nemoSVARX.methods.main.js',
+	'/templates/wurst/f2.0/legacyJS/jquery.nemoSVARX/jquery.SVARXBinder.js'
+	], function ($) {
+
+
+	$(function () {
+		$('.js-auth-restorepassform')
+				.one('svarxfailed svarxloaded',function(e){
+					$(this).on('submit',function(e) {
+						if (e.isDefaultPrevented()) {
+							return;
+						}
+
+						var $form = $(this),
+								$stub = $('<div></div>').addClass('js-auth__form__stub nemo-auth__stub'),
+								$messageblock = $form.find('.js-auth__message').empty().hide(),
+								$errorblock = $form.find('.js-auth__error').empty().hide();
+
+						e.preventDefault();
+
+						// Creating stub
+						$(this).append($stub);
+
+						$.post(
+							$form.prop('action'),
+							$form.serialize()+'&json=1',
+							function (data) {
+								$stub.remove();
+								if (data.success) {
+									$messageblock.empty().html(data.message).show();
+
+									if (typeof data.url != "undefined") {
+										document.location = (data.url != '') ? data.url : '/';
+									}
+								}
+								else {
+									$errorblock.empty().html(data.message).show();
+								}
+							},
+							'json'
+						).error(function(a,s,d,f){
+							$stub.remove();
+							$errorblock.empty().html(s).show();
+						});
+					})
+				})
+				.SVARXBinder({
+					XMLText: '<?xml version="1.0"?><svarx><preprocess/><validate>' +
+					'<rule for="/^(?!back_location)/" type="required" onerror="svarx-auth-required"/>' + // Rule for everything except "back_location" field
+					'</validate>' +
+					'</svarx>',
+					errorMessagesURL: '/SVARXSupport__getSVARXErrors',
+					SVARXOptions: {bindTo:'submit'}
+				});
+	});
+
+
+	});
+</script>
+
+<div class="js-restorePass__popupContainer nemo-auth nemo-auth_popup nemo-auth_passRecoveryPopup" style="display: none;">
+	<form class="nemo-auth__form nemo-auth__form_passrestore js-auth__form js-auth-restorepassform" method="post" action="/authorization__send_password_link?back_location=d41d8cd98f00b204e9800998ecf8427e">
+
+				<div class="nemo-ui-hilight nemo-ui-hilight_error nemo-auth__error js-auth__error" style="display: none;"></div>
+
+				<div class="nemo-ui-hilight nemo-ui-hilight_info nemo-auth__info js-auth__message" style="display: none;"></div>
+
+				<div class="nemo-auth__field nemo-auth__field_username nemo-auth__field_passrestore js-validation_anchor">
+			<label class="nemo-ui-textInput nemo-auth__field__label">
+	          <input class="nemo-ui-textInput__input nemo-auth__field__label__input" name="login" type="text" autofocus="autofocus" placeholder="Логин (эл. почта)">
+			</label>
+		</div>
+
+		<div class="nemo-auth__mainButtons nemo-auth__mainButtons_noMargin">
+			<a href="#" class="nemo-ui-pseudoLink js-header-backToAuth">Я вспомнил пароль</a>
+			<button type="button" class="nemo-ui-button nemo-ui-button_main js-header-restorePassSubmit" role="button">Восстановить</button>
+		</div>
+	</form>
+</div>
+									<a href="/authorization__registration" class="js-header-register nemo-common-pageHeader__inner__headerLinks__item nemo-ui-button nemo-ui-button_common nemo-common-pageHeader__registration">
+						Регистрация
+					</a>
+
+					<div class="js-registration-formcontainer_b2c" style="display: none;">
+						<!-- BEGIN /registration_inline.tpl -->
+<script>
+		require ([
+		'jquery'
+	], function ($) {
+				
+
+		$(function () {
+			$('.js-nemo-registration-form')
+				.one('svarxfailed svarxloaded',function(e){
+					$(document).on('submit','.js-nemo-registration-form',function(e) {
+						if (e.isDefaultPrevented()) {
+							return;
+						}
+
+						e.preventDefault();
+
+						var $form = $(this),
+							$stub = $('<div></div>').addClass('nemo-registration__stub'),
+							$errorBlock = $form.find('.js-registration_form_error').empty().hide(),
+							$successBlock = $form.find('.js-registration_form_success').empty().hide(),
+							$elementsBlock = $form.find('.js-registration_form_elements'),
+							$promptBlock = $( '.js-registration_prompt' );
+
+						// Creating stub
+						$form.append($stub);
+						$.post(
+							$form.prop('action'),
+							$form.serialize()+'&ajax=1',
+							function (data) {
+								$stub.remove();
+								if (data.success) {
+									if (typeof data.url != "undefined") {
+										document.location = (data.url != '') ? data.url : '/';
+									}
+									if (typeof data.message != "undefined") {
+										$successBlock.empty().html(data.message).show();
+										$elementsBlock.hide();
+										$promptBlock.hide();
+
+										if (typeof data.send_email != "undefined" && data.send_email) {
+											$('.js-header-registerPopup__registerButton').hide();
+										}
+									}
+								} else {
+									$errorBlock.empty().html(data.message).show();
+									$('.nemo-registration__field__captchaRefresh').click();
+								}
+							},
+							'json'
+						).error(function(a,s,d,f){
+							$stub.remove();
+							$errorBlock.empty().html(s).show();
+							console.log(a + "||"+ s + "||" + d + "||" + f);
+						});
+					});
+				});
+		});
+
+		
+				});
+	</script>
+
+<div class="nemo-registration">
+	<div class="js-registration_prompt">
+		
+	</div>
+
+			
+	
+
+	<form id="reg_form_5934" method="POST" action="/authorization__registration?back_location=d41d8cd98f00b204e9800998ecf8427e" class="js-nemo-registration-form">
+		<div class="js-registration_form_error nemo-ui-hilight nemo-ui-hilight_error" style="display: none;"></div>
+		<div class="js-registration_form_success nemo-ui-hilight nemo-ui-hilight_greenLight" style="display: none;"></div>
+
+		<div class="js-registration_form_elements ">
+			<!-- BEGIN /forms/registration/form_b2c.tpl -->
+
+
+<div class="nemo-ui-textInput nemo-registration__field nemo-registration__field_registration_email js-validation_anchor">
+		<input class="nemo-ui-textInput__input nemo-registration__field__input js-registration-field js-registration-field_registration_email" type="text" name="registration_email" placeholder="Email">
+</div><div class="nemo-ui-textInput nemo-registration__field nemo-registration__field_registration_password js-validation_anchor">
+		<input class="nemo-ui-textInput__input nemo-registration__field__input js-registration-field js-registration-field_registration_password" type="password" name="registration_password" placeholder="Пароль" autocomplete="new-password">
+</div><div class=" nemo-registration__field">
+    <label class="nemo-ui-checkbox nemo-registration__field_radio  js-validation_anchor nemo-registration__field_checkbox">
+        <input class="nemo-ui-checkbox__input" type="checkbox" value="true" checked name="subscribe">
+        <span class="nemo-ui-checkbox__caption">Получать информацию о лучших предложениях</span>
+    </label>
+</div><div class="nemo-ui-textInput nemo-registration__field new-registration__field_capture">
+	<div class="nemo-registration__field__captchaField js-validation_anchor">
+		<img class="nemo-registration__field__captcha" id="id200266624667254830_image" width="150" src alt="CAPTCHA image not loaded">
+		<a class="nemo-registration__field__captchaRefresh" id="id200266624667254830_refresh" href title="Refresh Image" data-id="id200266624667254830">
+			<i class="fa fa-refresh" aria-hidden="true"></i>
+		</a>
+		<input class="nemo-ui-textInput__input nemo-registration__field__input nemo-registration__field__input_capture js-registration-field js-registration-field_capture" type="text" name="capture" placeholder="Код с картинки" autocomplete="off">
+	</div>
+</div>
+<input type="hidden" class="js-captcha-code" name="captcha-param-code" value>
+<input type="hidden" class="js-captcha-time" name="captcha-param-time" value>
+<script>
+		require (['jquery'], function ($) {
+		
+		function loadCaptchaData(id) {
+			var xmlHTTP = new XMLHttpRequest();
+			xmlHTTP.open('GET', '/captcha.php?sid=' + Math.random(), true);
+
+			xmlHTTP.onload = function (e)
+			{
+				var dataURL = "data:image/jpeg;base64," + this.responseText;
+
+				$('#' + id + '_image').attr('src', dataURL);
+
+				$.getJSON('authorization__get_captcha', {}, function (data) {
+					$('#' + id + '_refresh').parents('form').find('.js-captcha-code').val(data.code);
+					$('#' + id + '_refresh').parents('form').find('.js-captcha-time').val(data.time);
+				});
+			};
+
+			xmlHTTP.send();
+		}
+
+		$('#id200266624667254830_refresh').unbind("click").click(function (e) {
+			if( $(this).data("deg") ) {
+				$(this).data("deg", $(this).data("deg")+360);
+			}
+			else{
+				$(this).data("deg",360);
+			}
+			$(this).css({
+				"transform": "rotate("+$(this).data("deg")+"deg)"
+			});
+
+			loadCaptchaData('id200266624667254830');
+			return false;
+		});
+
+		loadCaptchaData('id200266624667254830');
+	
+		});
+	</script>
+<!-- END /forms/registration/form_b2c.tpl -->
+			<script type="text/xml" id="svarx_xml_reg_form_5934"><?xml version="1.0"?>
+<svarx>
+  <preprocess/>
+  <validate>
+    <rule for="registration_email" type="regexp" skipempty="true" match="^[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$" flags="i" onerror="Указан неправильный e-mail"/>
+    <rule for="registration_email" type="required" onerror="Обязательное поле"/>
+    <rule for="registration_password" type="regexp" skipempty="false" match="^(.{6,})$" flags="i" onerror="Минимум 6 символов"/>
+    <rule for="registration_password" type="required" onerror="Обязательное поле"/>
+  </validate>
+</svarx>
+</script>
+
+<script>
+require ([
+	'jquery',
+	'/templates/wurst/f2.0/legacyJS/jquery.nemoSVARX/jquery.nemoSVARX.js',
+	'/templates/wurst/f2.0/legacyJS/jquery.nemoSVARX/jquery.nemoSVARX.methods.main.js',
+	'/templates/wurst/f2.0/legacyJS/jquery.nemoSVARX/jquery.SVARXBinder.js'
+], function ($) {
+
+	$(function(){
+
+		var $form = $('#reg_form_5934');
+		if(!$form.get(0)){
+			throw new Error('У объекта формы не задан идентификатор или не соответсвует реальному, используй {$node->setId(realId)} перед подключением этого шаблона');
+		}
+
+		$form.SVARXBinder({
+			//XMLURL: '/static/nemoSVARX.xml/template.avia-passengerscontact.xml',
+			XMLText: $.trim($('#svarx_xml_reg_form_5934').html()),
+			errorMessagesURL: '/SVARXSupport__getSVARXErrors',
+			XMLReplacements: typeof SVARXValidationReplaces == "undefined" ? {} : SVARXValidationReplaces,
+			SVARXOptions: {bindTo:'submit'/*, debug:true*/}
+		});
+	})
+
+});
+</script>
+
+
+			<div class="nemo-auth__mainButtons nemo-auth__mainButtons_noMargin">
+				<a href="#" class="nemo-ui-pseudoLink js-header-goToAuthFromReg">У меня есть аккаунт</a>
+				<input type="submit" class="nemo-ui-button nemo-ui-button_main" value="Создать аккаунт">
+			</div>
+		</div>
+	</form>
+
+	
+	
+	
+</div>
+</body></html>
