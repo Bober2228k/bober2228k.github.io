@@ -1,0 +1,89 @@
+#how-map{
+    width: 100%;
+    height: 440px;
+    z-index: 1;
+}
+  
+  
+.ip-aside{
+ width: 205px;
+ position: relative; 
+ z-index: 11;
+}
+
+.ip-search{
+    width: 195px;
+    margin: 7px 0 0 -6px;
+}
+
+.ip-right-menu{margin: 66px 0 0;}
+
+@media only screen and (min-width:767px)  and (max-width:1001px), only screen and (max-width:768px){ 
+    .ip-right-menu {display: none;}
+    .ipa-content{
+        margin-top: -46px;
+        display: block;
+      }
+    .ip-aside{display: block;}
+    .ipa-header .download-link-block{margin: 72px 7px 10px 0;} 
+
+    .ip-search{
+    position: relative;
+    top: -9px;
+}
+ 
+}
+
+.bx-core-waitwindow{
+  position: absolute;
+  z-index: 1000;
+  background: rgba(255, 255, 255, .7) url("../images/preloader_white.gif") no-repeat center center;
+  min-height: 740px;
+  min-width: 450px;
+  border: 0px;
+  margin: -14px 14px;
+}
+
+.ymap-display-left {
+  white-space: nowrap;
+  width: 120px;
+  left: -131px;
+  text-align: right;
+}
+
+.timetable-link {
+  padding-top: 5px !important;
+  font-size: 12px;
+}
+
+
+.doc-flip-header > span {
+    border-bottom: 1px dashed #034a94;
+    color: #034a94;
+    padding: 0 3px 0 0 ;
+}
+
+.doc-flip-header:hover > span{
+    color: #19acf2;
+    border-bottom: 1px dashed #19acf2;
+}
+
+.doc-flip-header.open > span {
+    color: #eb7501;
+    border-bottom-color: #eb7501;
+}
+
+.dd-header.doc-flip-header:hover:after{
+    border-top: 4px solid #19acf2;
+}
+
+.doc-flip-header.open:hover:after{
+    border-bottom: 4px solid #eb7501;
+    border-top: none;
+}
+
+.doc-flip-header.open:after{
+    border-bottom: 4px solid #eb7501;
+    border-top: none;
+    top: 5px;
+}

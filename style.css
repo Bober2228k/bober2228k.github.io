@@ -1,0 +1,226 @@
+.site-logo{
+  width: 305px;
+  height: 80px;
+}
+.site-logo img {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+}
+
+.change-lang {display: none;}
+
+.eng-version .site-logo{
+       width: 314px;
+       height: 72px;
+}
+
+.site-header{
+	padding: 36px 0 25px;
+}
+
+.header-menu{
+	top: 57px;
+}
+
+.tth-flight-start{
+	display: none;
+}
+
+.fi-info + .fi-info {width: 230px;}
+.fi-info + .fi-info + .fi-info{width: 225px;}
+
+.footer-banners {display: none;}
+
+@media only screen and (min-width: 999px){
+	.schedule-list .tth-flight {
+	  width: 103px;
+	}
+}
+@media only screen and (min-width: 999px){
+	.schedule-list .fi-info {
+	  width: 239px;
+	}
+}
+.clear {
+	clear: both;
+}
+
+.tth-destination {
+	width: 120px;
+}
+
+.fact-time {display: none;}
+
+.schedule-list .fi-body {
+	min-height: 95px;
+	padding: 11px 10px 15px 137px;
+}
+
+.parking-image, .parking-objects div, .parking-overlays div {
+	background: url(../images/parking.png) 0 0 no-repeat;
+}
+
+.parking-roads {
+	background: url(../images/parking.png) 0 -1040px no-repeat;
+	top: 0;
+	left: 0;
+	width: 1012px;
+}
+
+.parking-overlays .po-p1 {
+	width: 197px;
+	height: 140px;
+	background-position: -395px -1840px;
+	top: 120px;
+	left: 395px;
+}
+
+.parking-overlays .po-p2 {
+	width: 175px;
+	height: 94px;
+	background-position: -89px -1910px;
+	top: 270px;
+	left: 89px;
+}
+
+.parking-overlays .po-p3 {
+	width: 291px;
+	height: 202px;
+	background-position: -147px -2053px;
+	top: 334px;
+	left: 147px;
+}
+
+.parking-overlays .po-p4 {
+	width: 275px;
+	height: 181px;
+	background-position: -441px -2019px;
+	top: 299px;
+	left: 371px;
+}
+
+.parking-overlays .po-p5 {
+	width: 271px;
+	height: 173px;
+	background-position: -328px -2284px;
+	top: 474px;
+	left: 258px;
+}
+
+.parking-objects.po-terminals div {background-position: -207px -796px;}
+
+.parking-objects.po-buses div {background-position: -113px -810px;}
+
+.parking-objects.po-aps div {background-position: -336px -882px;}
+
+.parking-map {
+	margin: 70px -230px 0 -25px;
+	position: relative;
+}
+
+.parking-info {
+	top: 280px;
+	margin: 0 0 0 -100px;
+}
+
+.menu-map-icon {background: url("../images/minimap_color.jpg") 0 0 no-repeat;}
+
+.site-header {padding: 30px 0 23px;}
+
+.top-contact {
+	height: 30px;
+	width: 100%;
+}
+
+.inter-map {
+	float: right;
+	margin-left: 10px;
+}
+
+.timetable .tth-destination {
+	overflow: hidden;
+	white-space: nowrap;
+	position: relative;
+	text-indent: 0;
+}
+
+.escort-application .b-support-popup-wrap {margin-left: 20px;}
+
+.escort-application .poll-list input,
+.escort-application .poll-list label {vertical-align: middle;}
+
+.escort-application .radio-block-wrap {font-weight: bold;}
+
+.terminals-info {
+	clear: both;
+	color: #fff;
+	padding-top: 7px;
+}
+
+.terminals-info span {
+	color: #EB7501;
+}
+
+.main-page-content .tt-head {padding: 7px 0 4px 15px;}
+
+.inter-eye i {
+	display: inline-block;
+	width: 20px;
+	height: 11px;
+	vertical-align: middle;
+	background: url(../images/icon-eye.png);
+	margin-right: 5px;
+}
+.inter-eye:hover i {background-position: 0 -11px;}
+
+.top-contact-right {float: right;}
+
+.mtt-header-link {display: none;}
+
+@media only screen and (max-width: 1001px) and (min-width: 767px), only screen and (max-width: 768px) {
+	.ma-ovz {margin: 0 0 0 320px;}
+
+	.mp-main-news {margin: -143px 0 0;}
+}
+
+.poll-list.qw li {
+	padding-left: 0;
+}
+
+.poll-list.qw li:before {
+	display: none;
+}
+
+.poll-list.qw ol {
+	margin-left: 0;
+	margin-bottom: 40px;
+	margin-top: 20px;
+}
+
+.voting-form-box {
+	border: none;
+}
+
+
+.ipc-wrap .cf .ipa-content {
+	padding-left: 20px;
+	font: normal 15px/25px "Open Sans", Arial, Helvetica, sans-serif;
+}
+
+.ipc-wrap .cf .ipa-content h3 {
+	font: 600 25px/30px "Open Sans",Arial,Helvetica,sans-serif;
+	margin-top: 25px;
+	margin-bottom: 25px;
+}
+
+.ipc-wrap .cf .ipa-content ul li {
+	/*padding-top: 30px;*/
+}
+.ipc-wrap .cf .ipa-content ul li a {
+	text-decoration: none;
+	border-bottom: 1px dashed #034a94;
+}
+.ipc-wrap .cf .ipa-content ul li a:hover {
+	border-bottom: 1px dashed #eb7501;
+}

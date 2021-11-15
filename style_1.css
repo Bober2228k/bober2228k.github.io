@@ -1,0 +1,13 @@
+.flight-divider {
+	height: 40px;
+	border-bottom: 1px solid #475562;
+	background: #6c7781;
+	font-size: 15px;
+	line-height: 40px;
+	padding-left: 15px;
+}
+
+.timetable-link {
+	padding-top: 7px;
+	text-align: center;
+}
